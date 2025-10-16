@@ -1,0 +1,155 @@
+[
+  {
+    "test_id": "test_001",
+    "test_name": "User Authentication - Login",
+    "test_path": "tests/auth/test_login.py::test_valid_credentials",
+    "test_type": "integration",
+    "execution_time_seconds": 12.5,
+    "covered_files": [
+      "src/auth/login.py",
+      "src/auth/session.py",
+      "src/auth/validators.py"
+    ],
+    "criticality": "critical",
+    "last_failure_date": null,
+    "failure_count": 0,
+    "dependencies": []
+  },
+  {
+    "test_id": "test_002",
+    "test_name": "User Authentication - Password Reset",
+    "test_path": "tests/auth/test_password.py::test_reset_flow",
+    "test_type": "integration",
+    "execution_time_seconds": 18.3,
+    "covered_files": [
+      "src/auth/password.py",
+      "src/auth/email_service.py",
+      "src/auth/validators.py"
+    ],
+    "criticality": "high",
+    "last_failure_date": "2024-09-15",
+    "failure_count": 2,
+    "dependencies": ["test_001"]
+  },
+  {
+    "test_id": "test_003",
+    "test_name": "Payment Processing - Credit Card",
+    "test_path": "tests/payment/test_credit_card.py::test_successful_payment",
+    "test_type": "integration",
+    "execution_time_seconds": 25.7,
+    "covered_files": [
+      "src/payment/processor.py",
+      "src/payment/credit_card.py",
+      "src/payment/gateway.py"
+    ],
+    "criticality": "critical",
+    "last_failure_date": "2024-10-01",
+    "failure_count": 5,
+    "dependencies": []
+  },
+  {
+    "test_id": "test_004",
+    "test_name": "Payment Processing - Refund",
+    "test_path": "tests/payment/test_refund.py::test_full_refund",
+    "test_type": "integration",
+    "execution_time_seconds": 22.1,
+    "covered_files": [
+      "src/payment/processor.py",
+      "src/payment/refund.py"
+    ],
+    "criticality": "high",
+    "last_failure_date": null,
+    "failure_count": 1,
+    "dependencies": ["test_003"]
+  },
+  {
+    "test_id": "test_005",
+    "test_name": "Database - User CRUD Operations",
+    "test_path": "tests/database/test_user_operations.py::test_create_user",
+    "test_type": "integration",
+    "execution_time_seconds": 8.5,
+    "covered_files": [
+      "src/database/user_repository.py",
+      "src/models/user.py"
+    ],
+    "criticality": "medium",
+    "last_failure_date": null,
+    "failure_count": 0,
+    "dependencies": []
+  },
+  {
+    "test_id": "test_006",
+    "test_name": "API - User Endpoints",
+    "test_path": "tests/api/test_user_api.py::test_get_user",
+    "test_type": "e2e",
+    "execution_time_seconds": 45.2,
+    "covered_files": [
+      "src/api/user_controller.py",
+      "src/api/middleware.py",
+      "src/database/user_repository.py"
+    ],
+    "criticality": "high",
+    "last_failure_date": null,
+    "failure_count": 0,
+    "dependencies": ["test_005"]
+  },
+  {
+    "test_id": "test_007",
+    "test_name": "Performance - Load Test Users",
+    "test_path": "tests/performance/test_load.py::test_concurrent_users",
+    "test_type": "performance",
+    "execution_time_seconds": 120.0,
+    "covered_files": [
+      "src/api/user_controller.py",
+      "src/database/user_repository.py"
+    ],
+    "criticality": "medium",
+    "last_failure_date": "2024-09-20",
+    "failure_count": 3,
+    "dependencies": []
+  },
+  {
+    "test_id": "test_008",
+    "test_name": "Unit - Validation Utils",
+    "test_path": "tests/unit/test_validators.py::test_email_validation",
+    "test_type": "unit",
+    "execution_time_seconds": 2.1,
+    "covered_files": [
+      "src/auth/validators.py"
+    ],
+    "criticality": "low",
+    "last_failure_date": null,
+    "failure_count": 0,
+    "dependencies": []
+  },
+  {
+    "test_id": "test_009",
+    "test_name": "Unit - String Utils",
+    "test_path": "tests/unit/test_utils.py::test_string_sanitization",
+    "test_type": "unit",
+    "execution_time_seconds": 1.5,
+    "covered_files": [
+      "src/utils/string_utils.py"
+    ],
+    "criticality": "low",
+    "last_failure_date": null,
+    "failure_count": 0,
+    "dependencies": []
+  },
+  {
+    "test_id": "test_010",
+    "test_name": "Security - SQL Injection Prevention",
+    "test_path": "tests/security/test_sql_injection.py::test_parameterized_queries",
+    "test_type": "integration",
+    "execution_time_seconds": 15.8,
+    "covered_files": [
+      "src/database/user_repository.py",
+      "src/database/connection.py"
+    ],
+    "criticality": "critical",
+    "last_failure_date": null,
+    "failure_count": 0,
+    "dependencies": []
+  }
+]
+

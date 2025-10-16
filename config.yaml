@@ -1,0 +1,51 @@
+# Speculator Bot Configuration
+
+# Risk Analysis Settings
+risk_analysis:
+  enabled: true
+  historical_window_days: 90
+  min_confidence_threshold: 0.6
+  risk_levels:
+    high: 0.7
+    medium: 0.4
+    low: 0.2
+
+# Test Selection Settings
+test_selection:
+  enabled: true
+  max_tests: 50
+  prioritize_by_risk: true
+  include_critical_tests: true
+
+# Database Validation Settings
+database_validation:
+  enabled: true
+  schema_analysis: true
+  data_drift_detection: true
+  drift_threshold: 0.15
+  sample_size: 1000
+
+# File Types to Analyze
+file_patterns:
+  code:
+    - "*.py"
+    - "*.js"
+    - "*.java"
+    - "*.ts"
+  config:
+    - "*.yaml"
+    - "*.yml"
+    - "*.json"
+    - "*.xml"
+  database:
+    - "*.sql"
+    - "*migration*"
+    - "*schema*"
+
+# Feature Weights for Risk Calculation
+feature_weights:
+  code_complexity: 0.25
+  historical_failures: 0.35
+  change_magnitude: 0.20
+  file_criticality: 0.20
+

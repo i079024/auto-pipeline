@@ -1,0 +1,70 @@
+2025-10-15 23:02:25,382 - __main__ - INFO - Starting MCP HTTP Wrapper...
+2025-10-15 23:02:25,382 - __main__ - INFO - Endpoints available:
+2025-10-15 23:02:25,382 - __main__ - INFO -   GET  /health - Health check
+2025-10-15 23:02:25,382 - __main__ - INFO -   POST /api/speculator/analyze - Basic risk analysis
+2025-10-15 23:02:25,382 - __main__ - INFO -   POST /api/mcp/analyze - Enhanced LLM analysis
+2025-10-15 23:02:25,382 - __main__ - INFO - 
+2025-10-15 23:02:25,382 - __main__ - INFO - Server starting on http://localhost:3001
+ * Serving Flask app 'mcp-http-wrapper'
+ * Debug mode: off
+2025-10-15 23:02:25,834 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:3001
+ * Running on http://10.124.95.35:3001
+2025-10-15 23:02:25,834 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-10-15 23:04:49,714 - __main__ - INFO - Analyzing commit: 46dd46fb0326843ebe68b7987b4f31c9344ddeaf
+2025-10-15 23:04:49,745 - speculator_bot.core.change_analyzer - WARNING - Failed to initialize git repo: /Users/i079024/ariba/cursor/AIBot
+2025-10-15 23:04:49,748 - speculator_bot.core.test_selector - INFO - Loaded 10 tests from catalog
+2025-10-15 23:04:49,749 - speculator_bot.core.risk_analyzer - INFO - Loaded 12 historical failure records
+2025-10-15 23:04:49,749 - speculator_bot.bot - INFO - Speculator Bot initialized
+2025-10-15 23:04:49,749 - speculator_bot.bot - INFO - Starting speculation for commit 46dd46fb0326843ebe68b7987b4f31c9344ddeaf
+2025-10-15 23:04:49,749 - speculator_bot.bot - INFO - Analyzing code changes...
+2025-10-15 23:04:49,749 - speculator_bot.core.change_analyzer - ERROR - Git repository not initialized
+2025-10-15 23:04:49,749 - speculator_bot.bot - INFO - Analyzed 0 changed files
+2025-10-15 23:04:49,749 - speculator_bot.bot - INFO - Performing risk analysis...
+2025-10-15 23:04:49,749 - __main__ - WARNING - Analysis failed ('average_risk'), returning mock data
+2025-10-15 23:04:49,749 - __main__ - WARNING - Analysis returned empty results, returning mock data
+2025-10-15 23:04:49,751 - werkzeug - INFO - 127.0.0.1 - - [15/Oct/2025 23:04:49] "POST /api/speculator/analyze HTTP/1.1" 200 -
+2025-10-15 23:04:50,215 - __main__ - INFO - MCP Analysis for commit: 46dd46fb0326843ebe68b7987b4f31c9344ddeaf
+2025-10-15 23:04:50,215 - speculator_bot.bot - INFO - Starting speculation for commit 46dd46fb0326843ebe68b7987b4f31c9344ddeaf
+2025-10-15 23:04:50,215 - speculator_bot.bot - INFO - Analyzing code changes...
+2025-10-15 23:04:50,215 - speculator_bot.core.change_analyzer - ERROR - Git repository not initialized
+2025-10-15 23:04:50,215 - speculator_bot.bot - INFO - Analyzed 0 changed files
+2025-10-15 23:04:50,215 - speculator_bot.bot - INFO - Performing risk analysis...
+2025-10-15 23:04:50,215 - __main__ - WARNING - MCP analysis failed ('average_risk'), will return mock data
+2025-10-15 23:04:50,215 - __main__ - ERROR - Error during MCP analysis: 'NoneType' object has no attribute 'change_summary'
+Traceback (most recent call last):
+  File "/Users/i079024/ariba/cursor/AIBot/mcp-http-wrapper.py", line 219, in mcp_analyze
+    'changeIntroduced': analyze_change_intent(data, report),
+                        ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/i079024/ariba/cursor/AIBot/mcp-http-wrapper.py", line 285, in analyze_change_intent
+    files_changed = report.change_summary['total_files_changed']
+                    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'change_summary'
+2025-10-15 23:04:50,222 - werkzeug - INFO - 127.0.0.1 - - [15/Oct/2025 23:04:50] "[35m[1mPOST /api/mcp/analyze HTTP/1.1[0m" 500 -
+2025-10-16 00:09:01,430 - __main__ - INFO - Analyzing commit: 46dd46fb0326843ebe68b7987b4f31c9344ddeaf
+2025-10-16 00:09:01,430 - speculator_bot.bot - INFO - Starting speculation for commit 46dd46fb0326843ebe68b7987b4f31c9344ddeaf
+2025-10-16 00:09:01,430 - speculator_bot.bot - INFO - Analyzing code changes...
+2025-10-16 00:09:01,430 - speculator_bot.core.change_analyzer - ERROR - Git repository not initialized
+2025-10-16 00:09:01,430 - speculator_bot.bot - INFO - Analyzed 0 changed files
+2025-10-16 00:09:01,430 - speculator_bot.bot - INFO - Performing risk analysis...
+2025-10-16 00:09:01,430 - __main__ - WARNING - Analysis failed ('average_risk'), returning mock data
+2025-10-16 00:09:01,430 - __main__ - WARNING - Analysis returned empty results, returning mock data
+2025-10-16 00:09:01,431 - werkzeug - INFO - 127.0.0.1 - - [16/Oct/2025 00:09:01] "POST /api/speculator/analyze HTTP/1.1" 200 -
+2025-10-16 00:09:01,869 - __main__ - INFO - MCP Analysis for commit: 46dd46fb0326843ebe68b7987b4f31c9344ddeaf
+2025-10-16 00:09:01,869 - speculator_bot.bot - INFO - Starting speculation for commit 46dd46fb0326843ebe68b7987b4f31c9344ddeaf
+2025-10-16 00:09:01,869 - speculator_bot.bot - INFO - Analyzing code changes...
+2025-10-16 00:09:01,869 - speculator_bot.core.change_analyzer - ERROR - Git repository not initialized
+2025-10-16 00:09:01,869 - speculator_bot.bot - INFO - Analyzed 0 changed files
+2025-10-16 00:09:01,869 - speculator_bot.bot - INFO - Performing risk analysis...
+2025-10-16 00:09:01,869 - __main__ - WARNING - MCP analysis failed ('average_risk'), will return mock data
+2025-10-16 00:09:01,869 - __main__ - ERROR - Error during MCP analysis: 'NoneType' object has no attribute 'change_summary'
+Traceback (most recent call last):
+  File "/Users/i079024/ariba/cursor/AIBot/mcp-http-wrapper.py", line 219, in mcp_analyze
+    'changeIntroduced': analyze_change_intent(data, report),
+                        ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/i079024/ariba/cursor/AIBot/mcp-http-wrapper.py", line 285, in analyze_change_intent
+    files_changed = report.change_summary['total_files_changed']
+                    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'change_summary'
+2025-10-16 00:09:01,872 - werkzeug - INFO - 127.0.0.1 - - [16/Oct/2025 00:09:01] "[35m[1mPOST /api/mcp/analyze HTTP/1.1[0m" 500 -

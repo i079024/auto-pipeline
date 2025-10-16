@@ -1,0 +1,37 @@
+# SAP AI Core Configuration Example
+# Copy this to ai_core_config.yaml and fill in your values
+
+ai_core:
+  # Authentication (from SAP BTP service key)
+  auth_url: "https://YOUR-SUBDOMAIN.authentication.eu10.hana.ondemand.com/oauth/token"
+  client_id: "your-client-id-here"
+  client_secret: "your-client-secret-here"
+  
+  # AI Core API Endpoint
+  api_url: "https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com"
+  resource_group: "default"
+  
+  # Deployment Configuration
+  deployment:
+    scenario_id: "foundation-models"
+    executable_id: "azure-openai"
+    configuration_id: "gpt-4-config"
+    
+  # Model Settings
+  model:
+    name: "gpt-4"
+    temperature: 0.7
+    max_tokens: 2000
+    top_p: 1.0
+    
+  # Proxy Settings (optional - uncomment if behind corporate proxy)
+  # proxy:
+  #   http: "http://proxy.company.com:8080"
+  #   https: "https://proxy.company.com:8080"
+
+# Usage:
+# 1. Copy this file to ai_core_config.yaml
+# 2. Fill in your SAP AI Core service key details
+# 3. Update deployment and model settings
+# 4. Keep this file secure - add to .gitignore!
+

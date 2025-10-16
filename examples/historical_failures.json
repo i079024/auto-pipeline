@@ -1,0 +1,159 @@
+[
+  {
+    "timestamp": "2024-09-25T10:30:00",
+    "file_path": "src/payment/processor.py",
+    "failure_type": "runtime_error",
+    "severity": "high",
+    "resolution_time_hours": 4.5,
+    "related_commits": ["abc123", "def456"],
+    "metadata": {
+      "error_message": "Payment processing failed due to timeout",
+      "affected_users": 150,
+      "environment": "production"
+    }
+  },
+  {
+    "timestamp": "2024-09-28T14:15:00",
+    "file_path": "src/payment/processor.py",
+    "failure_type": "logic_error",
+    "severity": "high",
+    "resolution_time_hours": 6.0,
+    "related_commits": ["ghi789"],
+    "metadata": {
+      "error_message": "Incorrect refund amount calculated",
+      "affected_users": 45,
+      "environment": "production"
+    }
+  },
+  {
+    "timestamp": "2024-10-01T09:00:00",
+    "file_path": "src/payment/processor.py",
+    "failure_type": "integration_error",
+    "severity": "critical",
+    "resolution_time_hours": 8.5,
+    "related_commits": ["jkl012"],
+    "metadata": {
+      "error_message": "Payment gateway connection failed",
+      "affected_users": 500,
+      "environment": "production"
+    }
+  },
+  {
+    "timestamp": "2024-09-15T16:45:00",
+    "file_path": "src/auth/password.py",
+    "failure_type": "security_issue",
+    "severity": "high",
+    "resolution_time_hours": 3.0,
+    "related_commits": ["mno345"],
+    "metadata": {
+      "error_message": "Password reset tokens not expiring properly",
+      "affected_users": 0,
+      "environment": "staging"
+    }
+  },
+  {
+    "timestamp": "2024-09-18T11:20:00",
+    "file_path": "src/auth/password.py",
+    "failure_type": "validation_error",
+    "severity": "medium",
+    "resolution_time_hours": 2.0,
+    "related_commits": ["pqr678"],
+    "metadata": {
+      "error_message": "Weak password validation bypass",
+      "affected_users": 20,
+      "environment": "production"
+    }
+  },
+  {
+    "timestamp": "2024-09-20T13:30:00",
+    "file_path": "src/api/user_controller.py",
+    "failure_type": "performance_degradation",
+    "severity": "medium",
+    "resolution_time_hours": 5.5,
+    "related_commits": ["stu901"],
+    "metadata": {
+      "error_message": "Slow query causing timeout under load",
+      "affected_users": 1000,
+      "environment": "production"
+    }
+  },
+  {
+    "timestamp": "2024-09-22T08:15:00",
+    "file_path": "src/database/user_repository.py",
+    "failure_type": "database_error",
+    "severity": "high",
+    "resolution_time_hours": 7.0,
+    "related_commits": ["vwx234"],
+    "metadata": {
+      "error_message": "Deadlock in concurrent user updates",
+      "affected_users": 300,
+      "environment": "production"
+    }
+  },
+  {
+    "timestamp": "2024-10-03T15:00:00",
+    "file_path": "src/payment/credit_card.py",
+    "failure_type": "validation_error",
+    "severity": "medium",
+    "resolution_time_hours": 1.5,
+    "related_commits": ["yza567"],
+    "metadata": {
+      "error_message": "Invalid credit card format not caught",
+      "affected_users": 10,
+      "environment": "production"
+    }
+  },
+  {
+    "timestamp": "2024-10-05T10:45:00",
+    "file_path": "src/payment/gateway.py",
+    "failure_type": "integration_error",
+    "severity": "high",
+    "resolution_time_hours": 4.0,
+    "related_commits": ["bcd890"],
+    "metadata": {
+      "error_message": "Payment gateway API version mismatch",
+      "affected_users": 200,
+      "environment": "production"
+    }
+  },
+  {
+    "timestamp": "2024-09-12T12:00:00",
+    "file_path": "src/auth/login.py",
+    "failure_type": "authentication_failure",
+    "severity": "medium",
+    "resolution_time_hours": 2.5,
+    "related_commits": ["efg123"],
+    "metadata": {
+      "error_message": "Session token generation race condition",
+      "affected_users": 50,
+      "environment": "staging"
+    }
+  },
+  {
+    "timestamp": "2024-09-30T17:30:00",
+    "file_path": "src/config/database.py",
+    "failure_type": "configuration_error",
+    "severity": "critical",
+    "resolution_time_hours": 10.0,
+    "related_commits": ["hij456"],
+    "metadata": {
+      "error_message": "Database connection pool exhausted",
+      "affected_users": 2000,
+      "environment": "production"
+    }
+  },
+  {
+    "timestamp": "2024-10-02T09:15:00",
+    "file_path": "src/api/middleware.py",
+    "failure_type": "runtime_error",
+    "severity": "medium",
+    "resolution_time_hours": 3.5,
+    "related_commits": ["klm789"],
+    "metadata": {
+      "error_message": "Middleware exception not properly handled",
+      "affected_users": 100,
+      "environment": "production"
+    }
+  }
+]
+

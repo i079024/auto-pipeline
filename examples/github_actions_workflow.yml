@@ -1,0 +1,131 @@
+name: Speculator Bot Analysis
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+  push:
+    branches: [ main, develop ]
+
+jobs:
+  speculator-analysis:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Fetch all history for accurate analysis
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install Speculator Bot
+        run: |
+          pip install -r requirements.txt
+          pip install -e .
+      
+      - name: Run Speculator Bot Analysis
+        id: speculator
+        run: |
+          speculator analyze \
+            --repo . \
+            --config config.yaml \
+            --test-catalog examples/test_catalog.json \
+            --historical-data examples/historical_failures.json \
+            --output speculator_report.json \
+            --format json
+          
+          # Extract risk score
+          RISK_SCORE=$(jq -r '.deployment_risk_score' speculator_report.json)
+          echo "risk_score=$RISK_SCORE" >> $GITHUB_OUTPUT
+      
+      - name: Generate HTML Report
+        run: |
+          speculator analyze \
+            --repo . \
+            --config config.yaml \
+            --test-catalog examples/test_catalog.json \
+            --historical-data examples/historical_failures.json \
+            --output speculator_report.html \
+            --format html
+      
+      - name: Upload Report as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: speculator-report
+          path: |
+            speculator_report.json
+            speculator_report.html
+      
+      - name: Comment on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const report = JSON.parse(fs.readFileSync('speculator_report.json', 'utf8'));
+            
+            const riskScore = report.deployment_risk_score;
+            const emoji = riskScore >= 0.7 ? '🔴' : riskScore >= 0.4 ? '🟡' : '🟢';
+            
+            const body = `
+            ## ${emoji} Speculator Bot Analysis
+            
+            **Deployment Risk Score:** ${riskScore.toFixed(2)}
+            
+            ### Change Summary
+            - **Files Changed:** ${report.change_summary.total_files_changed}
+            - **Lines Added:** ${report.change_summary.total_lines_added}
+            - **Lines Removed:** ${report.change_summary.total_lines_removed}
+            - **Critical Files:** ${report.change_summary.critical_files_changed}
+            
+            ### Risk Analysis
+            - **Average Risk:** ${report.risk_analysis.average_risk.toFixed(2)}
+            - **High Risk Files:** ${report.risk_analysis.risk_distribution.high || 0}
+            - **Medium Risk Files:** ${report.risk_analysis.risk_distribution.medium || 0}
+            
+            ### Test Selection
+            - **Tests Selected:** ${report.test_selection.total_tests_selected}
+            - **Estimated Time:** ${report.test_selection.estimated_execution_time_minutes.toFixed(1)} minutes
+            - **Coverage Score:** ${(report.test_selection.coverage_score * 100).toFixed(1)}%
+            
+            ### Recommendation
+            ${report.overall_recommendation}
+            
+            [View Full Report](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})
+            `;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+      
+      - name: Check Risk Threshold
+        run: |
+          RISK_SCORE=${{ steps.speculator.outputs.risk_score }}
+          echo "Risk Score: $RISK_SCORE"
+          
+          if (( $(echo "$RISK_SCORE >= 0.8" | bc -l) )); then
+            echo "❌ Risk score too high! Deployment blocked."
+            exit 1
+          elif (( $(echo "$RISK_SCORE >= 0.6" | bc -l) )); then
+            echo "⚠️ High risk detected. Manual review recommended."
+            exit 0  # Don't fail, but warn
+          else
+            echo "✅ Risk acceptable."
+            exit 0
+          fi
+      
+      - name: Run Selected Tests
+        if: steps.speculator.outputs.risk_score < 0.8
+        run: |
+          # Extract selected test paths from report
+          jq -r '.test_selection.selected_tests[].test_path' speculator_report.json > selected_tests.txt
+          
+          # Run only selected tests
+          pytest $(cat selected_tests.txt | tr '\n' ' ')
+
